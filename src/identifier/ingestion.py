@@ -21,6 +21,9 @@ class AudioIngester:
 
         # Command construction as a list for subprocess safety
         command =[
+            r"D:\Code\ffmpeg-8.1-essentials_build\bin\ffmpeg.exe",
+            "-i", str(input_path),      # read the input file from input_path
+            "-ar", str(self.target_sr), # resample audio to target sample_path
             '-ac', str(self.channels),  # Mono channel
             '-acodec', 'pcm_s16le',     # 16-bit PCM codec
             '-y',                       # Overwrite output if exists
@@ -31,7 +34,7 @@ class AudioIngester:
             # Run the command and capture output for error handling
             result = subprocess.run(
                 command, 
-                stdout=subprocess.PIPE, 
+                stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE, 
                 text=True, 
                 check=True

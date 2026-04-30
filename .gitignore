@@ -1,1 +1,3 @@
 audio_env/
+*egg-info/
+processed_audio.wav
