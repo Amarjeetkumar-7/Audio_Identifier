@@ -10,9 +10,9 @@ dependencies = [
     "ffmpeg-python",  # Python bindings for FFmpeg
     "spleeter",           # For vocal/accompaniment separation
     "librosa",            # For audio analysis and feature extraction
+    "shazamio",           # For identification for music metadata
     "tensorflow",         # Backend for YAMNet and Spleeter
     "tensorflow-hub",     # To load the pre-trained YAMNet model [3, 4]
-    "acrcloud",           # For music identification API [5, 6]
     "freesound-python",   # For SFX metadata and similarity search [7, 8]
     "pydub"               # For high-level audio manipulation [9, 1]
 ]
