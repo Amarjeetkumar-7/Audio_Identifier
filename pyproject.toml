@@ -12,6 +12,7 @@ dependencies = [
     "librosa",            # For audio analysis and feature extraction
     "shazamio",           # For identification for music metadata
     "tensorflow",         # Backend for YAMNet and Spleeter
+    "flask",              # Web Framework
     "tensorflow-hub",     # To load the pre-trained YAMNet model [3, 4]
     "freesound-python",   # For SFX metadata and similarity search [7, 8]
     "pydub"               # For high-level audio manipulation [9, 1]

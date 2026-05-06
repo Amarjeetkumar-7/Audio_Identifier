@@ -6,12 +6,12 @@ warnings.filterwarnings("ignore")
 
 from identifier.ingestion import AudioIngester
 from identifier.recognition import MusicIdentifier
-from processing.separator import separate_audio_stems
+from identifier.separator import separate_audio_stems
 
 async def run_identification(input_media):
     # Ingestion: Convert to standardized WAV
     ingester = AudioIngester()
-    input_media = r"D:\Export\hatt thari.mp4"
+    input_media = r"D:\Audio\Cheques - song.mp3"
     temp_wav = "processed_audio.wav"
     ingester.convert_to_standard_wav(input_media, temp_wav)
     print(f"✓ Ingestion complete: {temp_wav}")
