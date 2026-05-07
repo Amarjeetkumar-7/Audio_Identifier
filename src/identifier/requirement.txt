@@ -1,0 +1,23 @@
+# Core Audio
+demucs
+pydub
+soundfile
+shazamio==0.3.0.0
+
+# Web UI
+streamlit
+
+# Async & HTTP
+aiohttp>=3.8.1,<4.0.0
+aiofiles>=0.8.0,<0.9.0
+anyio>=3.6.1,<4.0.0
+requests
+
+# Data
+numpy==1.23.5
+pandas==1.5.3
+
+# Compatibility fixes
+click==8.1.7
+typer==0.9.0
+flask==2.3.3
