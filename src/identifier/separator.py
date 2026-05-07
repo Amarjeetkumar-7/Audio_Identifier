@@ -1,37 +1,45 @@
 import os
-import librosa
-import numpy as np
-import soundfile as sf
+import sys
+import subprocess
 
 
 def separate_audio_stems(input_file, output_dir):
-    """Separates audio into two stems using Librosa HPS/S decomposition."""
     print(f"Separating: {input_file}...")
 
+    input_file = os.path.abspath(input_file)
     os.makedirs(output_dir, exist_ok=True)
-
-    # Load audio in mono at the file's native sample rate
-    y, sr = librosa.load(input_file, sr=None, mono=True)
-
-    # Harmonic/Percussive source separation
-    harmonic, percussive = librosa.effects.hpss(y)
-
     base_name = os.path.splitext(os.path.basename(input_file))[0]
-    result_dir = os.path.join(output_dir, base_name)
-    os.makedirs(result_dir, exist_ok=True)
 
-    vocals_path = os.path.join(result_dir, "vocals.wav")
-    background_path = os.path.join(result_dir, "background.wav")
+    cmd = [
+        sys.executable, "-m", "demucs",
+        "-n", "htdemucs",
+        "--device", "cpu",
+        "-o", output_dir,
+        input_file
+    ]
 
-    # Save the separated tracks
-    sf.write(vocals_path, harmonic, sr)
-    sf.write(background_path, percussive, sr)
+    print(f"  Using Python: {sys.executable}")
+    result = subprocess.run(cmd, capture_output=True, text=True)
 
-    return {
-        "vocals": vocals_path,
-        "background": background_path
-    }
+    if result.returncode != 0:
+        print("Demucs error:", result.stderr[-2000:])
+        return None
 
-# Example Usage:
-# stems = separate_audio_stems('data/processed/input_16k.wav', 'data/stems/')
-# print(f"Isolated Background SFX/Music at: {stems['background']}")
+    # Demucs output path: output_dir/htdemucs/<base_name>/<stem>.wav
+    demucs_out = os.path.join(output_dir, "htdemucs", base_name)
+
+    stems = {}
+    for name in ["vocals", "drums", "bass", "other"]:
+        src = os.path.join(demucs_out, f"{name}.wav")
+        if os.path.exists(src):
+            stems[name] = src
+            print(f"  ✓ {name}: {src}")
+        else:
+            print(f"  ✗ {name} not found at {src}")
+
+    if not stems:
+        print("No stems generated.")
+        return None
+
+    print(f"✓ 4 stems saved in: {demucs_out}")
+    return stems
