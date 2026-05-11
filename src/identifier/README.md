@@ -25,23 +25,23 @@ End‑to‑end script – main.py wires everything together using asyncio.run, p
 # Project structure
 - identifier/ingestion.py – FFmpeg‑based WAV conversion.
 
-- 'identifier/separator.py – Demucs‑based stem separation.'
+- identifier/separator.py – Demucs‑based stem separation.
 
-identifier/recognition.py – Shazamio‑based music identification.
+- identifier/recognition.py – Shazamio‑based music identification.
 
-main.py – orchestration, example entry point.
+- main.py – orchestration, example entry point.
 
 # Running the demo
 Place a test audio file on your system.
 
 Update the path in main.py:
 
-python
+- python
 if __name__ == "__main__":
     asyncio.run(run_identification(r"D:\Audio\Cheques - song.mp3"))
 Run:
 
-bash
+- bash
 python main.py
 You should see logs for ingestion, stem generation, and the recognized track information printed in the terminal
 
@@ -50,32 +50,32 @@ Main dependencies used in the project:
 
 Python (tested with Python 3.x)
 
-FFmpeg – required for audio conversion in ingestion.py; must be installed and accessible at the path configured in the code.
+- FFmpeg – required for audio conversion in ingestion.py; must be installed and accessible at the path configured in the code.
 
-Demucs – used for audio source separation (CLI access via python -m demucs).
+- Demucs – used for audio source separation (CLI access via python -m demucs).
 
-shazamio – asynchronous Shazam client for music recognition.
+- shazamio – asynchronous Shazam client for music recognition.
 
-Standard library modules: os, sys, subprocess, asyncio, warnings, multiprocessing, pathlib.
+- Standard library modules: os, sys, subprocess, asyncio, warnings, multiprocessing, pathlib.
 
 Other Python packages may be required transitively by Demucs (e.g., PyTorch/torchaudio) and by shazamio, and should be installed via pip as per their documentation.
 
 # Setup and installation (example)
 These steps are indicative; exact versions can be adjusted based on the environment.
 
-Clone the repository
+- Clone the repository
 
 bash
 git clone <your-repo-url>
 cd <your-repo-folder>
 Create a virtual environment (recommended)
 
-bash
+- bash
 python -m venv .venv
 source .venv/bin/activate  # Windows: .venv\Scripts\activate
 Install Python dependencies
 
-bash
+- bash
 pip install -r requirements.txt
 The requirements.txt should include at least shazamio and any libraries required by Demucs. Demucs itself can be installed via pip install demucs or following the official setup guide.
 
