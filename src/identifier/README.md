@@ -23,9 +23,9 @@ End‑to‑end script – main.py wires everything together using asyncio.run, p
 
 
 # Project structure
-identifier/ingestion.py – FFmpeg‑based WAV conversion.
+- identifier/ingestion.py – FFmpeg‑based WAV conversion.
 
-identifier/separator.py – Demucs‑based stem separation.
+- 'identifier/separator.py – Demucs‑based stem separation.'
 
 identifier/recognition.py – Shazamio‑based music identification.
 
